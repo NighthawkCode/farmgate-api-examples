@@ -1,13 +1,15 @@
 ### Farmgate Cloud API Quickstart Guide
 Welcome to the Farmgate Cloud API Quickstart Guide! This guide will help you get up and running with the Farmgate Cloud API using curl.
 
-## Prerequisites
+## Pre-requisites
 Before you begin, ensure you have:
 
 An API key provided by Farmgate Cloud.
 curl installed on your machine. You can check by running:
 
+```
 curl --version
+```
 
 # Step 1: Test Your API Key
 Your API key is required to authenticate requests. Let’s verify your API key with a simple health check endpoint.
@@ -39,7 +41,7 @@ Each user has access to two organizations:
 To retrieve your list of organizations, run:
 
 ```
-curl -X GET https://api.nighthawk.ag/organizations \
+curl -X GET https://api.nighthawk.ag/farmgate/organizations \
 -H "Authorization: Bearer <YOUR_API_KEY>"
 ```
 

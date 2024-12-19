@@ -104,21 +104,33 @@ To interact with the Copilot, use the /farmgate/copilot endpoint, which supports
 ### Initiating a Conversation with Copilot
 To start a conversation with the Copilot, send a POST request to the following endpoint.
 
-curl -X POST https://api.nighthawk.ag/farmgate/copilot \
+```
+curl -i -X POST https://api.nighthawk.ag/farmgate/copilot \
 -H "Authorization: Bearer <YOUR_API_KEY>" \
 -H "Content-Type: application/json" \
 -d '{
   "user_email": <YOUR_USER_EMAIL>,
   "org_id": <YOUR_ORG_ID>,
   "message": "Hello Copilot!",
+  "chat_id": <OPTIONAL_CHAT_ID>
 }'
+```
 
 Request Parameters:
+- user_email: (Required) The email of the user initiating the conversation.
+- org_id: (Required) The organization ID for which the query is being made.
+- message: (Required) The user’s question or query.
+- chat_id: (Optional) The chat session ID:
+    - If provided, the conversation will continue using the specified session.
+    - If omitted, Copilot will start a new session and return the assigned chat_id in the response headers.
 
-user_email: (Required) The email of the user initiating the conversation.
-org_id: (Required) The organization ID for which the query is being made.
-message: (Required) The user’s question or query.
-chat_id: (Optional) The chat session ID. If not provided, a new chat session will be started.
+### Understanding chat_id
+
+Header Name: When starting a new session, the chat_id is included in the response header as Chat-ID.
+
+Continuing a Conversation: To maintain context across multiple queries, reuse the same chat_id in subsequent requests.
+
+Starting a New Conversation: If no chat_id is provided, Copilot will treat the query as the start of a new conversation.
 
 ### Example Response
 The Copilot will respond with a streaming response, which can be consumed line-by-line.
